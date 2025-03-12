@@ -8,7 +8,6 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    // Replace with your deployed backend URL if not running locally
     axios.get("http://localhost:5000/api/products")
       .then((res) => setProducts(res.data))
       .catch((err) => console.error("Error fetching products:", err));

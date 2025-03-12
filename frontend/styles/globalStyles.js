@@ -6,16 +6,26 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-  
+
   body {
-    font-family: 'Arial', sans-serif;
-    background: #f5f5f5;
-    color: #333;
+    font-family: ${props => props.theme.fonts.primary};
+    background: ${props => props.theme.colors.background};
+    color: ${props => props.theme.colors.dark};
   }
-  
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: ${props => props.theme.fonts.secondary};
+  }
+
   a {
     text-decoration: none;
     color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+    border: none;
+    outline: none;
   }
 `;
 
