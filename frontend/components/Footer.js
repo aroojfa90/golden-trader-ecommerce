@@ -75,8 +75,8 @@ const Footer = () => {
 
         <FooterSection>
           <h3>Contact Us</h3>
-          <p>Mehran House, 756-C Tariq Rd,</p>
-          <p>Karachi, Pakistan</p>
+          <p>Mandi Bahauddin</p>
+          <p>Punjab, Pakistan</p>
           <p>Email: info@makeupcity.com</p>
           <p>Phone: (021) 111-222-333</p>
         </FooterSection>

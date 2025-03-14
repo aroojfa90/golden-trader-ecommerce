@@ -8,11 +8,11 @@ const Main = styled.main`
   padding-top: 80px; // Adjust this value based on your navbar height
 `;
 
-const Layout = ({ children }) => {
+function Layout({ children }) {
   return (
     <>
       <Head>
-        <title>Makeup City - Beauty & Skincare</title>
+        <title>Golden Trader - Beauty & Skincare</title>
         <meta name="description" content="Shop the best beauty and skincare products" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -21,6 +21,6 @@ const Layout = ({ children }) => {
       <Footer />
     </>
   );
-};
+}
 
 export default Layout; 

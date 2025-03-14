@@ -5,7 +5,8 @@ const nextConfig = {
       domains: [
         "encrypted-tbn0.gstatic.com", 
         "images.unsplash.com",
-        "cdn.pixabay.com"
+        "cdn.pixabay.com",
+        "images.pexels.com"
       ],
     },
   };

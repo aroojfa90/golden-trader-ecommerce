@@ -6,16 +6,17 @@ import BestSellers from "../components/BestSellers";
 import FeaturedBrands from "../components/FeaturedBrands";
 import Newsletter from "../components/Newsletter";
 import { categories, brands } from '../data/products';
+import Layout from '../components/Layout';
+import ShopByCategory from '../components/ShopByCategory';
 
 export default function Home() {
   return (
-    <>
+    <Layout>
       <Head>
         <title>Beauty & Care | Golden Trader</title>
         <meta name="description" content="Shop luxury beauty and skincare products" />
       </Head>
 
-      <Navigation />
 
       <MainContainer>
         {/* Hero Section */}
@@ -28,21 +29,7 @@ export default function Home() {
         </HeroSection>
 
         {/* Categories */}
-        <Section>
-          <SectionTitle>Shop By Category</SectionTitle>
-          <CategoryGrid>
-            {categories.map((category) => (
-              <CategoryCard key={category.name}>
-                <CategoryImage src={category.image} alt={category.name} />
-                <CategoryOverlay>
-                  <CategoryName>{category.name}</CategoryName>
-                  <CategoryDescription>{category.description}</CategoryDescription>
-                  <CategoryButton>Shop Now</CategoryButton>
-                </CategoryOverlay>
-              </CategoryCard>
-            ))}
-          </CategoryGrid>
-        </Section>
+        <ShopByCategory />
 
         {/* Best Sellers Section */}
         <BestSellers />
@@ -63,8 +50,7 @@ export default function Home() {
         <Newsletter />
       </MainContainer>
 
-      <Footer />
-    </>
+    </Layout>
   );
 }
 
@@ -113,89 +99,6 @@ const ShopButton = styled.button`
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(255,105,180,0.3);
-  }
-`;
-
-const Section = styled.section`
-  padding: 5rem 5%;
-`;
-
-const SectionTitle = styled.h2`
-  text-align: center;
-  font-size: 2.8rem;
-  margin-bottom: 3rem;
-  font-family: 'Playfair Display', serif;
-  color: #333;
-`;
-
-const CategoryGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 0 5%;
-`;
-
-const CategoryCard = styled.div`
-  position: relative;
-  height: 400px;
-  overflow: hidden;
-  border-radius: 15px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-`;
-
-const CategoryImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-
-  ${CategoryCard}:hover & {
-    transform: scale(1.1);
-  }
-`;
-
-const CategoryOverlay = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-  background: linear-gradient(transparent, rgba(0,0,0,0.8));
-  color: white;
-  transform: translateY(100px);
-  transition: transform 0.3s ease;
-
-  ${CategoryCard}:hover & {
-    transform: translateY(0);
-  }
-`;
-
-const CategoryName = styled.h3`
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-`;
-
-const CategoryDescription = styled.p`
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  opacity: 0.9;
-`;
-
-const CategoryButton = styled.button`
-  padding: 0.8rem 2rem;
-  background: #ff69b4;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #ff5ba7;
-    transform: translateY(-2px);
   }
 `;
 

@@ -1,28 +1,23 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useCart } from '../context/CartContext';
 
-export default function Navigation() {
+const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { cart } = useCart();
 
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 0);
     };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!mounted) {
-    return null; // Return null on server-side and first render
-  }
+  if (!mounted) return null;
 
   return (
     <>
@@ -30,7 +25,7 @@ export default function Navigation() {
         <TopBarContent>
           <TopBarLeft>
             <PhoneNumber>
-              <i className="fas fa-phone-alt"></i> +1 234 567 890
+              <i className="fas fa-phone-alt"></i> +923466863552
             </PhoneNumber>
             <Email>
               <i className="fas fa-envelope"></i> info@beautycare.com
@@ -77,7 +72,7 @@ export default function Navigation() {
             </IconButton>
             <CartButton aria-label="Cart">
               <i className="fas fa-shopping-bag"></i>
-              <CartCount>0</CartCount>
+              <CartCount>{cart.length}</CartCount>
             </CartButton>
             <IconButton aria-label="Account">
               <i className="far fa-user"></i>
@@ -87,7 +82,9 @@ export default function Navigation() {
       </Nav>
     </>
   );
-}
+};
+
+export default Navigation;
 
 const TopBar = styled.div`
   background: #222;
