@@ -9,8 +9,17 @@ import { useState } from 'react';
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2.5rem;
-  padding: 1rem 0;
+  gap: 2rem;
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ProductCard = styled.div`
@@ -28,6 +37,13 @@ const ProductCard = styled.div`
     .product-actions {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .product-actions {
+      opacity: 1;
+      transform: none;
     }
   }
 `;
@@ -77,6 +93,10 @@ const ActionButton = styled.button`
 
 const ProductInfo = styled.div`
   padding: 1.5rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const Brand = styled.div`

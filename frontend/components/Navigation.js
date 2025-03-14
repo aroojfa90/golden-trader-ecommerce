@@ -2,11 +2,13 @@ import styled from "styled-components";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useCart } from '../context/CartContext';
+import { FiMenu, FiX, FiShoppingBag, FiSearch, FiUser } from 'react-icons/fi';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { cart } = useCart();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -42,14 +44,18 @@ const Navigation = () => {
       </TopBar>
 
       <Nav $isScrolled={isScrolled}>
-        <NavContent>
+        <NavContainer>
+          <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <FiX /> : <FiMenu />}
+          </MenuButton>
+          
           <Logo>
             <Link href="/" passHref>
               <LogoText>BEAUTY & CARE</LogoText>
             </Link>
           </Logo>
 
-          <MainNav>
+          <NavLinks isOpen={isMenuOpen}>
             {[
               { name: "Makeup", href: "/makeup" },
               { name: "Spa", href: "/spa" },
@@ -60,25 +66,25 @@ const Navigation = () => {
             ].map((item) => (
               <NavItem key={item.href}>
                 <Link href={item.href} passHref>
-                  <NavLink>{item.name}</NavLink>
+                  <NavLink onClick={() => setIsMenuOpen(false)}>{item.name}</NavLink>
                 </Link>
               </NavItem>
             ))}
-          </MainNav>
+          </NavLinks>
 
           <NavRight>
             <IconButton aria-label="Search">
-              <i className="fas fa-search"></i>
+              <FiSearch />
             </IconButton>
             <CartButton aria-label="Cart">
-              <i className="fas fa-shopping-bag"></i>
+              <FiShoppingBag />
               <CartCount>{cart.length}</CartCount>
             </CartButton>
             <IconButton aria-label="Account">
-              <i className="far fa-user"></i>
+              <FiUser />
             </IconButton>
           </NavRight>
-        </NavContent>
+        </NavContainer>
       </Nav>
     </>
   );
@@ -136,27 +142,36 @@ const SocialLink = styled.a`
 `;
 
 const Nav = styled.nav`
-  background: ${props => props.$isScrolled ? 'rgba(255,255,255,0.95)' : 'white'};
   position: fixed;
-  top: ${props => props.$isScrolled ? '0' : '36px'};
+  top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 `;
 
-const NavContent = styled.div`
+const NavContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
-const Logo = styled.div`
-  flex: 1;
+const Logo = styled.h1`
+  font-size: 1.8rem;
+  color: #b8860b;
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const LogoText = styled.a`
@@ -168,10 +183,36 @@ const LogoText = styled.a`
   text-decoration: none;
 `;
 
-const MainNav = styled.div`
+const MenuButton = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #333;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const NavLinks = styled.div`
   display: flex;
-  gap: 2.5rem;
-  margin: 0 2rem;
+  align-items: center;
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    display: ${props => props.isOpen ? 'flex' : 'none'};
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: white;
+    flex-direction: column;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
 `;
 
 const NavItem = styled.div``;
@@ -180,13 +221,10 @@ const NavLink = styled.a`
   color: #333;
   text-decoration: none;
   font-weight: 500;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 
   &:hover {
-    color: #ff69b4;
+    color: #b8860b;
   }
 `;
 
@@ -199,14 +237,15 @@ const NavRight = styled.div`
 const IconButton = styled.button`
   background: none;
   border: none;
-  font-size: 1.2rem;
-  color: #333;
+  font-size: 1.25rem;
   cursor: pointer;
-  transition: color 0.3s ease;
+  color: #333;
+  display: flex;
+  align-items: center;
   padding: 0.5rem;
 
   &:hover {
-    color: #ff69b4;
+    color: #b8860b;
   }
 `;
 
